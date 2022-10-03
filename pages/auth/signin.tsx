@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import {Center, Button, Title, Stack, Text, Group} from '@mantine/core';
-
 import { supabase } from '../../utils/supabaseClient';
-
+import { authProtected } from '../../components/AuthProtected';
 
 
 interface SignInProps {}
