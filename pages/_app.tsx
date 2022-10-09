@@ -11,20 +11,32 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { useToggle } from "@mantine/hooks";
+import PageLayout from "../components/PageLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
-  const [colorScheme, toggleColorScheme] = useToggle(['dark', 'light'] as const);
+  const [colorScheme, toggleColorScheme] = useToggle([
+    "dark",
+    "light",
+  ] as const);
 
   return (
-    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-    <MantineProvider withGlobalStyles withNormalizeCSS theme={{colorScheme:colorScheme}}>      
-    <SupabaseProvider value={supabase}>
-      <UserProvider supabaseClient={supabaseClient}>
-        <Component {...pageProps} />
-      </UserProvider>
-    </SupabaseProvider>
-    </MantineProvider>
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
+    >
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{ colorScheme: colorScheme }}
+      >
+        <SupabaseProvider value={supabase}>
+          <UserProvider supabaseClient={supabaseClient}>
+            <PageLayout>
+              <Component {...pageProps} />
+            </PageLayout>
+          </UserProvider>
+        </SupabaseProvider>
+      </MantineProvider>
     </ColorSchemeProvider>
   );
 }
