@@ -2,17 +2,22 @@ import { FC } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import {Center, Button, Title, Stack, Text, Group} from '@mantine/core';
 import { supabase } from '../../utils/supabaseClient';
+import { useRouter } from 'next/router';
 
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {
+  const router = useRouter();
 
-  function signInWithGoogle(event: any) {
+  async function signInWithGoogle(event: any) {
     event.preventDefault();
-    supabase.auth.signIn({
-      provider: 'google'},
-      { redirectTo: 'http://localhost:3000'}
+    const { user } = await supabase.auth.signIn({
+      provider: 'google'}, {
+        redirectTo: '/'
+      }
     )
+
+    console.log(user)
   }
 
     return (

@@ -26,6 +26,7 @@ import { TbClipboardList } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
 import { useUser } from "@supabase/auth-helpers-react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { useHover } from "@mantine/hooks";
 MdKeyboardArrowLeft
 
 const Brand = () => {
@@ -126,7 +127,7 @@ const User = () => {
   const { pathname } = useRouter();
   const { user, error } = useUser();
 
-  console.log(user?.user_metadata?.name)
+  // console.log(user?.user_metadata?.name)
 
   return (
     <Link passHref href={pathname === "settings" ? "/" : "/settings"}>
@@ -188,6 +189,8 @@ const Nav = ({
 
   const MainLink = ({ icon, color, label, pageLink }: MainLinkProps) => {
     const router = useRouter();
+    const { hovered, ref } = useHover();
+
     return (
       <Link href={pageLink} passHref>
         <UnstyledButton

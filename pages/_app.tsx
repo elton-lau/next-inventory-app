@@ -12,8 +12,13 @@ import {
 import { useState } from "react";
 import { useToggle } from "@mantine/hooks";
 import PageLayout from "../components/PageLayout";
+import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const queryClient = new QueryClient()
+
   const [colorScheme, toggleColorScheme] = useToggle([
     "dark",
     "light",
@@ -31,9 +36,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <SupabaseProvider value={supabase}>
           <UserProvider supabaseClient={supabaseClient}>
+          <QueryClientProvider client={queryClient}>
             <PageLayout>
               <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
             </PageLayout>
+          </QueryClientProvider>
           </UserProvider>
         </SupabaseProvider>
       </MantineProvider>

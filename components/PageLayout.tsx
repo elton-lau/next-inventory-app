@@ -22,7 +22,7 @@ const PageLayout = ({ children }: any) => {
           background:
             theme.colorScheme === "dark"
               ? theme.colors.dark[7]
-              : theme.colors.gray[7],
+              : theme.colors.gray[0],
         },
       }}
       navbarOffsetBreakpoint='sm'
